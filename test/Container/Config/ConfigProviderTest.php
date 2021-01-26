@@ -1,8 +1,8 @@
 <?php
 
-namespace AntidotTest\Tactician\Container\Config;
+namespace AntidotTest\React\DBAL\Container\Config;
 
-use Antidot\Tactician\Container\Config\ConfigProvider;
+use Antidot\React\DBAL\Container\Config\ConfigProvider;
 use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
