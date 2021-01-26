@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Antidot\React\DBAL\Container;
 
 use Antidot\React\DBAL\Container\Config\ConfigProvider;
-use Drift\DBAL\Driver\Driver;
-use Drift\DBAL\Driver\Mysql\MysqlDriver;
-use Drift\DBAL\Driver\PostgreSQL\PostgreSQLDriver;
-use Drift\DBAL\Driver\SQLite\SQLiteDriver;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
+use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Psr\Container\ContainerInterface;
-use React\EventLoop\LoopInterface;
 
-class DriverFactory extends DriverInConfig
+class PlatformFactory extends DriverInConfig
 {
-
     public function __invoke(
         ContainerInterface $container,
         string $connectionName = ConfigProvider::DEFAULT_CONNECTION
-    ): Driver {
+    ): AbstractPlatform {
         /** @var array<string, array<string, array>> $globalConfig */
         $globalConfig = $container->get('config');
 
@@ -29,17 +28,18 @@ class DriverFactory extends DriverInConfig
         $config = $dbalConfig[$connectionName];
         $driverName = $this->getDriverFromConfig($config);
 
-        /** @var LoopInterface $loop */
-        $loop = $container->get(LoopInterface::class);
-
         if ('mysql' === $driverName) {
-            return new MysqlDriver($loop);
+            return new MySqlPlatform();
         }
 
         if ('postgres' === $driverName) {
-            return new PostgreSQLDriver($loop);
+            if (false === empty($config['version']) && '9.4' === $config['version']) {
+                return new PostgreSQL94Platform();
+            }
+
+            return new PostgreSQL100Platform();
         }
 
-        return new SQLiteDriver($loop);
+        return new SqlitePlatform();
     }
 }

@@ -68,7 +68,7 @@ class DriverFactoryTest extends TestCase
                     'dbal' => [
                         'connections' => [
                             'default' => [
-                                'driver' => 'postgre',
+                                'driver' => 'postgres',
                             ],
                         ],
                     ],
