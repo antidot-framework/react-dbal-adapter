@@ -1,6 +1,6 @@
 <?php
 
-namespace Antidot\Tactician\Container\Config;
+namespace Antidot\React\DBAL\Container\Config;
 
 class ConfigProvider
 {
