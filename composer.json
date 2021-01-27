@@ -55,7 +55,7 @@
     },
     "extra": {
         "laminas": {
-            "config-provider": "Antidot\\Tactician\\Container\\Config\\ConfigProvider"
+            "config-provider": "Antidot\\React\\DBAL\\Container\\Config\\ConfigProvider"
         }
     }
 }
