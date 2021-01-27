@@ -14,12 +14,15 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "drift/dbal": "^0.1.2"
+        "drift/dbal": "^0.1.2",
+        "psr/container": "^1.0"
     },
     "require-dev": {
+        "clue/reactphp-sqlite": "^1.1",
+        "infection/infection": "^0.20",
         "phpro/grumphp": "^1.0",
         "phpunit/phpunit": "^8.0 || ^9.0",
-        "infection/infection": "^0.20",
+        "react/mysql": "^0.5.4",
         "squizlabs/php_codesniffer": "^3.4",
         "symfony/var-dumper": "^5.1",
         "vimeo/psalm": "^4.0"
@@ -52,7 +55,7 @@
     },
     "extra": {
         "laminas": {
-            "config-provider": "Antidot\\Tactician\\Container\\Config\\ConfigProvider"
+            "config-provider": "Antidot\\React\\DBAL\\Container\\Config\\ConfigProvider"
         }
     }
 }
